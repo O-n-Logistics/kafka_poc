@@ -1,0 +1,15 @@
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+}
+
+// Lombok Annotation Processor 강제 적용
+tasks.withType(JavaCompile).configureEach {
+    options.annotationProcessorPath = configurations.annotationProcessor
+}
+
+bootJar { enabled = false }

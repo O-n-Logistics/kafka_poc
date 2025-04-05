@@ -1,0 +1,55 @@
+plugins {
+	id 'org.springframework.boot' version '3.4.4' apply false
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'java'
+}
+
+allprojects {
+	group = 'on.ssgdeal'
+	version = '1.0.0-SNAPSHOT'
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+	// 적용 플러그인 설정
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	// 공통 의존성 추가
+	dependencies {
+		// Web
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		// lombok
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+		// jasypt
+		implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+		// Test
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	}
+
+	bootJar { enabled = true }
+	jar { enabled = true }
+}
+
+project(':common') { // common은 bootJar로 패키징 할 필요 없음
+	bootJar { enabled = false }
+	jar { enabled = true }
+}
+
+project(':consumer') {
+	dependencies {
+		implementation project(':common')
+	}
+}
+
+project(':producer') {
+	dependencies {
+		implementation project(':common')
+	}
+}
