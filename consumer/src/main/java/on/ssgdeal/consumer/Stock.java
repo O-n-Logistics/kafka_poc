@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import on.ssgdeal.consumer.dto.CreateStockDto;
 
 @Entity
 @Builder
@@ -21,9 +20,7 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String productName;
-
     private Long stock;
 
     public static Stock create(CreateStockDto dto) {
@@ -33,11 +30,10 @@ public class Stock {
             .build();
     }
 
-    public void increase(Long value) {
-        stock += value;
-    }
-
     public void decrease(Long value) {
+        if (stock < value) {
+            throw new IllegalArgumentException("재고가 부족합니다.");
+        }
         stock -= value;
     }
 }

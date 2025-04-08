@@ -1,10 +1,10 @@
 package on.ssgdeal.producer;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({on.ssgdeal.common.JasyptConfig.class})
+@ComponentScan(basePackages = "on.ssgdeal.common")
 public class CommonConfiguration {
 
 }

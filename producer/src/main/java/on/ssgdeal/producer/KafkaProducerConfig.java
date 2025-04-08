@@ -1,5 +1,6 @@
 package on.ssgdeal.producer;
 
+import on.ssgdeal.common.Topic;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,11 @@ public class KafkaProducerConfig {
 
     @Bean
     public NewTopic orderTopic() {
-        return new NewTopic("order-events", 3, (short) 1);
+        return new NewTopic(Topic.ORDER.getValue(), 3, (short) 1);
+    }
+
+    @Bean
+    public NewTopic orderRollbackTopic() {
+        return new NewTopic(Topic.ORDER_ROLLBACK.getValue(), 3, (short) 1);
     }
 }

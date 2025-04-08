@@ -1,6 +1,4 @@
-package on.ssgdeal.consumer.dto;
-
-import on.ssgdeal.consumer.request.CreateStockRequest;
+package on.ssgdeal.consumer;
 
 public record CreateStockDto(
     String productName,

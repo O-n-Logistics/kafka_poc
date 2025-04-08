@@ -11,7 +11,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping("/order")
+    @PostMapping
     public String createOrder(
         @RequestBody String name
     ) {
@@ -20,7 +20,7 @@ public class OrderController {
             return orderService.createOrder(name);
         } catch (RuntimeException e) {
             // 예외 처리
-            return "주문 생성에 실패했습니다.";
+            return e.getMessage();
         }
     }
 }

@@ -6,16 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter
 @JsonSerialize
 @NoArgsConstructor
-@Setter
-public class StockDecreaseEvent {
+public class OrderRollbackEvent{
 
     private String productName;
-    private Long quantity;
 
-    public StockDecreaseEvent(String productName, Long quantity) {
+    public OrderRollbackEvent(String productName) {
         this.productName = productName;
-        this.quantity = quantity;
     }
 }
