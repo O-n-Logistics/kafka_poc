@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum Topic {
     ORDER("create.order.event"),
     ORDER_ROLLBACK("rollback.order.event"),
+    NUMBER("number.event"),
     ;
 
     private final String value;

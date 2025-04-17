@@ -2,6 +2,7 @@ package on.ssgdeal.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import on.ssgdeal.common.NumberEvent;
 import on.ssgdeal.common.OrderRollbackEvent;
 import on.ssgdeal.common.StockDecreaseEvent;
 import on.ssgdeal.common.Topic;
@@ -46,5 +47,17 @@ public class OrderService {
         if (!orderRepository.existsByProductName(productName)) {
             log.info("주문 롤백 성공, {}", productName);
         }
+    }
+
+    public String numberEvent(Integer number) {
+        log.info("두구두구... 입력받은 숫자는?! => {}", number);
+        try {
+            NumberEvent event = new NumberEvent(number);
+            kafkaTemplate.send(Topic.NUMBER.getValue(), event);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException();
+        }
+        return "오늘의 숫자 이벤트 끝~  -> " + number;
     }
 }
